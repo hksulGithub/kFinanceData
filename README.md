@@ -12,13 +12,13 @@ A python library to access the Korean Financial Market Data Open API. (Currently
 
 ## Installation
 
-pip install git+https://github.com/hksulGithub/kfinancedata.git
+pip install git+https://github.com/hksulGithub/kFinanceData.git
 
 
 ## Usage
 
 ```
-from kfinancedata import kfinancedata as kf
+from kFinanceData import kFinanceData as kf
 ```
 
 ### Examples
@@ -32,7 +32,7 @@ APP_KEY = "YOUR_API_KEY"
 APP_SECRET = "YOUR_API_SECRET" 
 
 
-kf = kf.kfinancedataInstance(APP_KEY, APP_SECRET)
+kf = kf.kFinanceDataInstance(APP_KEY, APP_SECRET)
 kf.genAuthToken()
 
 ```
@@ -42,9 +42,9 @@ kf.genAuthToken()
 
 APP_KEY = "YOUR_API_KEY"
 APP_SECRET = "YOUR_API_SECRET" 
-issuedAuthToken = ""
+issuedAuthToken = "YOUR_AUTH_TOKEN"
 
-kf = kf.kfinancedataInstance(APP_KEY, APP_SECRET)
+kf = kf.kFinanceDataInstance(APP_KEY, APP_SECRET)
 kf.useAuthToken(issuedAuthToken)
 
 ```
