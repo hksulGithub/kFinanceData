@@ -69,7 +69,7 @@ exerciseUpperBound = 320
 kospi200DF = kf._codeDataFrame[(kf._codeDataFrame["기초자산 명"] == 'KOSPI200')]
 kospi200OptionDF = kospi200DF[kospi200DF["상품종류"].isin(assetTypeList)] 
 kospi200OptionPriceRangeDF = kospi200OptionDF[(kospi200OptionDF["행사가"]<exerciseUpperBound) & (kospi200OptionDF["행사가"]>exerciseLowerBound) ]
-kospi200OptionPriceTimeRangeDF = kospi200OptionPriceRangeDF[kospi200OptionPriceRangeDF["단축코드"].str.slice(4,6) == nextMonthString]
+kospi200OptionPriceTimeRangeDF = kospi200OptionPriceRangeDF[kospi200OptionPriceRangeDF["단축코드"].str.slice(4,6) == expirationMonthString]
 
 
 codeList = list(kospi200OptionPriceTimeRangeDF['단축코드'])
