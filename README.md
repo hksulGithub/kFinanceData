@@ -1,7 +1,8 @@
 # kFinanceData
 
-A python library to access the Korean Financial Market Data Open API. (Currently only supported by 한국투자증권; KIS)^[https://apiportal.koreainvestment.com/]
-
+- A python library to access the Korean Financial Market Data Open API. 
+  (REST api is currently only supported by 한국투자증권; KIS)^[https://apiportal.koreainvestment.com/]
+- Currently, focusing on supporting derivatives assets
 
 ## Table of Contents
 
@@ -11,9 +12,9 @@ A python library to access the Korean Financial Market Data Open API. (Currently
 - [License](#license)
 
 ## Installation
-
+```
 pip install git+https://github.com/hksulGithub/kFinanceData.git
-
+```
 
 ## Usage
 
@@ -26,27 +27,21 @@ from kFinanceData import kFinanceData as kfd
 
 #### Sign In
 ```
- 
-
 APP_KEY = "YOUR_API_KEY"
 APP_SECRET = "YOUR_API_SECRET" 
 
-
 kfdi = kfd.kFinanceDataInstance(APP_KEY, APP_SECRET)
 kfdi.genAuthToken()
-
 ```
 
 ##### Sign in using previously issued Auth Token (KIS suggests auth token to be issued once per day)
 ```
-
 APP_KEY = "YOUR_API_KEY"
 APP_SECRET = "YOUR_API_SECRET" 
 issuedAuthToken = "YOUR_AUTH_TOKEN"
 
 kfdi = kfd.kFinanceDataInstance(APP_KEY, APP_SECRET)
 kfdi.useAuthToken(issuedAuthToken)
-
 ```
 
 
@@ -60,7 +55,6 @@ kfdi.useAuthToken(issuedAuthToken)
   
 
 ```
-
 assetTypeList = ('5', '6') # Is a Call option or a Put option on KOSPI200 index
 expirationMonthString = "06" # June Maturity
 exerciseBound = (300, 320)
@@ -70,10 +64,7 @@ kospi200OptionDF = kospi200DF[kospi200DF["상품종류"].isin(assetTypeList)]
 kospi200OptionPriceRangeDF = kospi200OptionDF[ (kospi200OptionDF["행사가"]<exerciseBound[1]) & (kospi200OptionDF["행사가"]>exerciseBound[0]) ]
 kospi200OptionPriceTimeRangeDF = kospi200OptionPriceRangeDF[kospi200OptionPriceRangeDF["단축코드"].str.slice(4,6) == expirationMonthString]
 
-
 codeList = list(kospi200OptionPriceTimeRangeDF['단축코드'])
-
-
 ```
 
 
@@ -81,8 +72,6 @@ codeList = list(kospi200OptionPriceTimeRangeDF['단축코드'])
 
 ```
 df = kfdi.downloadFuturesOptions(codeList) 
-df
-
 ```
 
 #### Sample Output
