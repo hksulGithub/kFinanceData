@@ -29,7 +29,6 @@ from kFinanceData import kFinanceData as kfd
 APP_KEY = "YOUR_API_KEY"
 APP_SECRET = "YOUR_API_SECRET" 
 
-
 kfdi = kfd.kFinanceDataInstance(APP_KEY, APP_SECRET)
 kfdi.genAuthToken()
 ```
