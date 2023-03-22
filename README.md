@@ -12,9 +12,9 @@
 - [License](#license)
 
 ## Installation
-
+```
 pip install git+https://github.com/hksulGithub/kFinanceData.git
-
+```
 
 ## Usage
 
