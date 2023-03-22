@@ -4,4 +4,4 @@
 #from kfinancedata import getFutureOptionCodesHeaderData #Import the methods
 
 
-from kfinancedata.kfinancedata import kfinancedataInstance
+#from kfinancedata.kfinancedata import kfinancedataInstance
