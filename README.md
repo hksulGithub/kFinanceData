@@ -18,7 +18,7 @@ pip install git+https://github.com/hksulGithub/kFinanceData.git
 ## Usage
 
 ```
-from kFinanceData import kFinanceData as kf
+from kFinanceData import kFinanceData as kfd
 ```
 
 ### Examples
@@ -32,20 +32,20 @@ APP_KEY = "YOUR_API_KEY"
 APP_SECRET = "YOUR_API_SECRET" 
 
 
-kf = kf.kFinanceDataInstance(APP_KEY, APP_SECRET)
-kf.genAuthToken()
+kfdi = kfd.kFinanceDataInstance(APP_KEY, APP_SECRET)
+kfdi.genAuthToken()
 
 ```
 
-##### Sign in using the Auth Token Previously Offered (KIS asks auth token to be reIssued once per day)
+##### Sign in using previously issued Auth Token (KIS suggests auth token to be issued once per day)
 ```
 
 APP_KEY = "YOUR_API_KEY"
 APP_SECRET = "YOUR_API_SECRET" 
 issuedAuthToken = "YOUR_AUTH_TOKEN"
 
-kf = kf.kFinanceDataInstance(APP_KEY, APP_SECRET)
-kf.useAuthToken(issuedAuthToken)
+kfdi = kfd.kFinanceDataInstance(APP_KEY, APP_SECRET)
+kfdi.useAuthToken(issuedAuthToken)
 
 ```
 
@@ -56,20 +56,19 @@ kf.useAuthToken(issuedAuthToken)
   - That is a Call option or a Put option 
   - The underlying is the KOSPI200 Stock Index
   - That matures in June
-  - And the Expiration price is between 290 and 330
+  - And the Expiration price is between 300 and 320
   
 
 ```
 
-expirationMonthString = "06" # June Maturity
 assetTypeList = ('5', '6') # Is a Call option or a Put option on KOSPI200 index
-exerciseLowerBound = 300
-exerciseUpperBound = 320
+expirationMonthString = "06" # June Maturity
+exerciseBound = (300, 320)
 
-kospi200DF = kf._codeDataFrame[(kf._codeDataFrame["기초자산 명"] == 'KOSPI200')]
+kospi200DF = kfdi._codeDataFrame[(kfdi._codeDataFrame["기초자산 명"] == 'KOSPI200')]
 kospi200OptionDF = kospi200DF[kospi200DF["상품종류"].isin(assetTypeList)] 
-kospi200OptionPriceRangeDF = kospi200OptionDF[(kospi200OptionDF["행사가"]<exerciseUpperBound) & (kospi200OptionDF["행사가"]>exerciseLowerBound) ]
-kospi200OptionPriceTimeRangeDF = kospi200OptionPriceRangeDF[kospi200OptionPriceRangeDF["단축코드"].str.slice(4,6) == nextMonthString]
+kospi200OptionPriceRangeDF = kospi200OptionDF[ (kospi200OptionDF["행사가"]<exerciseBound[1]) & (kospi200OptionDF["행사가"]>exerciseBound[0]) ]
+kospi200OptionPriceTimeRangeDF = kospi200OptionPriceRangeDF[kospi200OptionPriceRangeDF["단축코드"].str.slice(4,6) == expirationMonthString]
 
 
 codeList = list(kospi200OptionPriceTimeRangeDF['단축코드'])
@@ -81,10 +80,14 @@ codeList = list(kospi200OptionPriceTimeRangeDF['단축코드'])
 #### Downloading the data into a dataframe
 
 ```
-df = kf.downloadFuturesOptions(codeList) 
+df = kfdi.downloadFuturesOptions(codeList) 
 df
 
 ```
+
+#### Sample Output
+
+![](https://i.imgur.com/GJuMlwe.png)
 
 ## Contributing
 
