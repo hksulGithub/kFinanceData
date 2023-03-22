@@ -56,7 +56,7 @@ kf.useAuthToken(issuedAuthToken)
   - That is a Call option or a Put option 
   - The underlying is the KOSPI200 Stock Index
   - That matures in June
-  - And the Expiration price is between 290 and 330
+  - And the Expiration price is between 300 and 320
   
 
 ```
