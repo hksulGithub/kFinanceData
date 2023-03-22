@@ -52,10 +52,13 @@ kf.useAuthToken(issuedAuthToken)
 
 #### Getting the List of Offered codes - Futures and Options
 
-- Example: Get the list of Futures and options ...
+- Example: Get the list of Futures and Options ...
+  - That is a Call option or a Put option 
+  - The underlying is the KOSPI200 Stock Index
   - That matures in June
-  - Is a Call option or a Put option on KOSPI200 index
   - And the Expiration price is between 290 and 330
+  
+
 ```
 
 expirationMonthString = "06" # June Maturity
