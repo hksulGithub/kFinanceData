@@ -41,10 +41,10 @@ kf.genAuthToken()
 
 APP_KEY = "YOUR_API_KEY"
 APP_SECRET = "YOUR_API_SECRET" 
-yourToken = ""
+issuedAuthToken = ""
 
 kf = kf.kfinancedataInstance(APP_KEY, APP_SECRET)
-kf.useAuthToken(yourToken)
+kf.useAuthToken(issuedAuthToken)
 
 ```
 
