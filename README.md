@@ -12,32 +12,37 @@ A python library to access the Korean Financial Market Data Open API. (Currently
 
 ## Installation
 
-Instructions on how to install and run the project.
+pip install git+https://github.com/hksulGithub/kfinancedata.git
 
-### Prerequisites
-
-List any dependencies or prerequisites needed to run the project.
-
-### Installation Steps
-
-List step-by-step instructions for installing the project.
 
 ## Usage
 
-Instructions on how to use the project.
+from kfinancedata import kfinancedata as kf
+
 
 ### Examples
 
-Provide examples of how to use the project in a real-world scenario.
+```
+ 
+
+APP_KEY = "YOUR_API_KEY"
+APP_SECRET = "YOUR_API_SECRET" 
+
+
+kf = kf.kfinancedataInstance(APP_KEY, APP_SECRET)
+kf.genAuthToken()
+
+
+
+yourToken = ""
+kf.useAuthToken(yourToken)
+```
 
 ## Contributing
 
-Guidelines for contributing to the project, including code standards, issue trackers, and pull requests.
 
 ## License
 
-Information on the license for the project and any terms of use.
 
 ### Acknowledgments
 
-Give credit to any resources or individuals that helped with the project.
