@@ -1,4 +1,4 @@
-# kfinancedata
+# kFinanceData
 
 A python library to access the Korean Financial Market Data Open API. (Currently only supported by 한국투자증권; KIS)^[https://apiportal.koreainvestment.com/]
 
@@ -52,10 +52,10 @@ kf.useAuthToken(issuedAuthToken)
 
 #### Getting the List of Offered codes - Futures and Options
 
-- Example: Get the list of Futures and options 
- - Matures in June
- - Is a Call option or a Put option on KOSPI200 index
- - And the Expiration price is between 290 and 330
+- Example: Get the list of Futures and options ...
+  - That matures in June
+  - Is a Call option or a Put option on KOSPI200 index
+  - And the Expiration price is between 290 and 330
 ```
 
 expirationMonthString = "06" # June Maturity
