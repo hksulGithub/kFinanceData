@@ -1,7 +1,8 @@
 # kFinanceData
 
-A python library to access the Korean Financial Market Data Open API. (Currently only supported by 한국투자증권; KIS)^[https://apiportal.koreainvestment.com/]
-
+- A python library to access the Korean Financial Market Data Open API. 
+  (REST api is currently only supported by 한국투자증권; KIS)^[https://apiportal.koreainvestment.com/]
+- Currently, focusing on supporting derivatives assets
 
 ## Table of Contents
 
