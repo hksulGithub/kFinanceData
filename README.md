@@ -86,7 +86,7 @@ df
 
 ```
 
-#### Output
+#### Sample Output
 
 ![](https://i.imgur.com/GJuMlwe.png)
 
