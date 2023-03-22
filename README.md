@@ -18,7 +18,7 @@ pip install git+https://github.com/hksulGithub/kFinanceData.git
 ## Usage
 
 ```
-from kFinanceData import kFinanceData as kf
+from kFinanceData import kFinanceData as kfd
 ```
 
 ### Examples
@@ -32,8 +32,8 @@ APP_KEY = "YOUR_API_KEY"
 APP_SECRET = "YOUR_API_SECRET" 
 
 
-kf = kf.kFinanceDataInstance(APP_KEY, APP_SECRET)
-kf.genAuthToken()
+kfdi = kfd.kFinanceDataInstance(APP_KEY, APP_SECRET)
+kfdi.genAuthToken()
 
 ```
 
@@ -44,8 +44,8 @@ APP_KEY = "YOUR_API_KEY"
 APP_SECRET = "YOUR_API_SECRET" 
 issuedAuthToken = "YOUR_AUTH_TOKEN"
 
-kf = kf.kFinanceDataInstance(APP_KEY, APP_SECRET)
-kf.useAuthToken(issuedAuthToken)
+kfdi = kfd.kFinanceDataInstance(APP_KEY, APP_SECRET)
+kfdi.useAuthToken(issuedAuthToken)
 
 ```
 
@@ -80,7 +80,7 @@ codeList = list(kospi200OptionPriceTimeRangeDF['단축코드'])
 #### Downloading the data into a dataframe
 
 ```
-df = kf.downloadFuturesOptions(codeList) 
+df = kfdi.downloadFuturesOptions(codeList) 
 df
 
 ```
