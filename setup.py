@@ -4,11 +4,11 @@ from setuptools import setup
 setup(
     # Needed to silence warnings (and to be a worthwhile package)
     name='kfinancedata',
-    url='https://github.com/hksulGithub/kfinancedata',
+    url='https://github.com/hksulGithub/kFinanceData',
     author='Hong Kee Sul',
     author_email='hksul@cau.ac.kr',
     # Needed to actually package something
-    packages=['kfinancedata'],
+    packages=['kFinanceData'],
     # Needed for dependencies
     install_requires=['pandas', 'pytz', 'requests'],
     # *strongly* suggested for sharing
