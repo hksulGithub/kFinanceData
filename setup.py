@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     # Needed to silence warnings (and to be a worthwhile package)
-    name='kfinancedata',
+    name='kFinanceData',
     url='https://github.com/hksulGithub/kFinanceData',
     author='Hong Kee Sul',
     author_email='hksul@cau.ac.kr',
