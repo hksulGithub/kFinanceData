@@ -13,11 +13,15 @@ import json
 
         
 class kFinanceDataInstance:
+  _URL_BASE = "https://openapivts.koreainvestment.com:29443"
+  #_AUTH_PATH = "oauth2/tokenP"
+  #_FUTURESOPTIONS_PRICE_URL = "/uapi/domestic-futureoption/v1/quotations/inquire-price"
+
   def __init__(self, APP_KEY, APP_SECRET ):
     self._APP_KEY = APP_KEY
     self._APP_SECRET = APP_SECRET
-    self._URL_BASE = "https://openapivts.koreainvestment.com:29443" #모의투자서비스
     self._AUTH_PATH = "oauth2/tokenP"
+    #self._URL_BASE = "https://openapivts.koreainvestment.com:29443"
     self._FUTURESOPTIONS_PRICE_URL = "/uapi/domestic-futureoption/v1/quotations/inquire-price"
     self._codeDataFrame = self.getFutureOptionCodes()
 
@@ -27,32 +31,25 @@ class kFinanceDataInstance:
             "appkey":self._APP_KEY, 
             "appsecret":self._APP_SECRET}
     
-    URL = f"{self._URL_BASE}/{self._AUTH_PATH}"
+    URL = f"{_URL_BASE}/{self._AUTH_PATH}"
     res = requests.post(URL, headers=headers, data=json.dumps(body))
-    x = res.json()["access_token"]
- 
     self._ACCESS_TOKEN = res.json()["access_token"]
-
     print(self._ACCESS_TOKEN)
+
   def useAuthToken(self, newToken):
     self._ACCESS_TOKEN = newToken
 
   def _getFutureOptionCodesHeaderData(self):
-    #https://github.com/koreainvestment/open-trading-api/ 
     zipFileInfoUrl = "https://raw.githubusercontent.com/koreainvestment/open-trading-api/main/stocks_info/domestic_future_code.py"
     responseText = requests.get(zipFileInfoUrl).text
-
-    # Extract the first argument to the urllib.request.urlretrieve function
     zipFileInfoPattern = r"urllib.request.urlretrieve\(\"([^\"]*)\""
     match = re.search(zipFileInfoPattern, responseText)
     actualZipFileUrl = match.group(1)
-
     startIndex = responseText.find("[")
     endIndex = responseText.rfind("]")
     zipFileColumnData = eval(responseText[startIndex:endIndex+1])
     zipFileColumnData = [a.strip() for a in zipFileColumnData]
     return (actualZipFileUrl, zipFileColumnData)
-
 
   def _getFutureOptionCodesFromZipUrlandColumns(self, zipFileUrl, zipFileColumns):
     r = requests.get(zipFileUrl)
@@ -60,12 +57,9 @@ class kFinanceDataInstance:
       zip_file_path = os.path.join(tmp_dir, 'fo_idx_code_mts.zip')
       with open(zip_file_path, "wb") as f:
         f.write(r.content)
-        # Extract the zip file to the temporary directory
         with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
           zip_ref.extractall(tmp_dir)
           mst_file_path = os.path.join(tmp_dir, "fo_idx_code_mts.mst")
-
-          # Load the MST file as a CSV file with "|" delimiter
           codeDF = pd.read_csv(mst_file_path, delimiter='|', encoding='CP949', names=zipFileColumns, header=None)
           return codeDF
     return None
@@ -78,7 +72,7 @@ class kFinanceDataInstance:
   
   def downloadFuturesOptions(self, futureOptionsCodeList):
 
-    FutureOptions_Price_URL = f"{self._URL_BASE}/{self._FUTURESOPTIONS_PRICE_URL}"
+    FutureOptions_Price_URL = f"{_URL_BASE}/{self._FUTURESOPTIONS_PRICE_URL}"
     inputHeaders = {#"Content-Type":"application/json", 
               "content-type":"utf-8",
               "authorization": f"Bearer {self._ACCESS_TOKEN}",
