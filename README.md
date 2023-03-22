@@ -61,14 +61,13 @@ kf.useAuthToken(issuedAuthToken)
 
 ```
 
-expirationMonthString = "06" # June Maturity
 assetTypeList = ('5', '6') # Is a Call option or a Put option on KOSPI200 index
-exerciseLowerBound = 300
-exerciseUpperBound = 320
+expirationMonthString = "06" # June Maturity
+exerciseBound = (300, 320)
 
 kospi200DF = kf._codeDataFrame[(kf._codeDataFrame["기초자산 명"] == 'KOSPI200')]
 kospi200OptionDF = kospi200DF[kospi200DF["상품종류"].isin(assetTypeList)] 
-kospi200OptionPriceRangeDF = kospi200OptionDF[(kospi200OptionDF["행사가"]<exerciseUpperBound) & (kospi200OptionDF["행사가"]>exerciseLowerBound) ]
+kospi200OptionPriceRangeDF = kospi200OptionDF[ (kospi200OptionDF["행사가"]<exerciseBound[1]) & (kospi200OptionDF["행사가"]>exerciseBound[0]) ]
 kospi200OptionPriceTimeRangeDF = kospi200OptionPriceRangeDF[kospi200OptionPriceRangeDF["단축코드"].str.slice(4,6) == expirationMonthString]
 
 
