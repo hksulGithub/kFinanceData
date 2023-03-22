@@ -17,8 +17,9 @@ pip install git+https://github.com/hksulGithub/kfinancedata.git
 
 ## Usage
 
+```
 from kfinancedata import kfinancedata as kf
-
+```
 
 ### Examples
 
