@@ -37,7 +37,7 @@ kf.genAuthToken()
 
 ```
 
-##### Sign in using the Auth Token Previously Offered (KIS asks auth token to be reIssued once per day)
+##### Sign in using previously issued Auth Token (KIS suggests auth token to be issued once per day)
 ```
 
 APP_KEY = "YOUR_API_KEY"
