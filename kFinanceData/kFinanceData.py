@@ -30,8 +30,12 @@ class kFinanceDataInstance:
     
     URL = f"{self._URL_BASE}/{self._AUTH_PATH}"
     res = requests.post(URL, headers=headers, data=json.dumps(body))
-    self._ACCESS_TOKEN = res.json()["access_token"]
-    print(self._ACCESS_TOKEN)
+    try:
+      self._ACCESS_TOKEN = res.json()["access_token"]
+      print(self._ACCESS_TOKEN)
+    except:
+      print("genAuthToken Error", res.json())
+    
 
   def useAuthToken(self, newToken):
     self._ACCESS_TOKEN = newToken
