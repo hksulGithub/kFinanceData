@@ -13,15 +13,12 @@ import json
 
         
 class kFinanceDataInstance:
-  _URL_BASE = "https://openapivts.koreainvestment.com:29443"
-  #_AUTH_PATH = "oauth2/tokenP"
-  #_FUTURESOPTIONS_PRICE_URL = "/uapi/domestic-futureoption/v1/quotations/inquire-price"
 
   def __init__(self, APP_KEY, APP_SECRET ):
     self._APP_KEY = APP_KEY
     self._APP_SECRET = APP_SECRET
     self._AUTH_PATH = "oauth2/tokenP"
-    #self._URL_BASE = "https://openapivts.koreainvestment.com:29443"
+    self._URL_BASE = "https://openapivts.koreainvestment.com:29443"
     self._FUTURESOPTIONS_PRICE_URL = "/uapi/domestic-futureoption/v1/quotations/inquire-price"
     self._codeDataFrame = self.getFutureOptionCodes()
 
@@ -31,7 +28,7 @@ class kFinanceDataInstance:
             "appkey":self._APP_KEY, 
             "appsecret":self._APP_SECRET}
     
-    URL = f"{_URL_BASE}/{self._AUTH_PATH}"
+    URL = f"{self._URL_BASE}/{self._AUTH_PATH}"
     res = requests.post(URL, headers=headers, data=json.dumps(body))
     self._ACCESS_TOKEN = res.json()["access_token"]
     print(self._ACCESS_TOKEN)
@@ -72,7 +69,7 @@ class kFinanceDataInstance:
   
   def downloadFuturesOptions(self, futureOptionsCodeList):
 
-    FutureOptions_Price_URL = f"{_URL_BASE}/{self._FUTURESOPTIONS_PRICE_URL}"
+    FutureOptions_Price_URL = f"{self._URL_BASE}/{self._FUTURESOPTIONS_PRICE_URL}"
     inputHeaders = {#"Content-Type":"application/json", 
               "content-type":"utf-8",
               "authorization": f"Bearer {self._ACCESS_TOKEN}",
