@@ -12,7 +12,7 @@ import requests
 import json
 
         
-class kfinancedataInstance:
+class kFinanceDataInstance:
   def __init__(self, APP_KEY, APP_SECRET ):
     self._APP_KEY = APP_KEY
     self._APP_SECRET = APP_SECRET
