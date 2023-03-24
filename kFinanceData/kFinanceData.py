@@ -143,6 +143,8 @@ class kFinanceDataInstance:
       df_one.insert(6, 'price', df_one.pop('futs_prpr'))
       return df_one
     except:
+      if output.msg_cd == "EGW00123":
+        print ("Auth Token expired. Must be reissued")
       print("Error, getSingleDataframe: res", output)
     
 
