@@ -117,30 +117,33 @@ class kFinanceDataInstance:
     now = datetime.datetime.now(timezone('Asia/Seoul'))
     res = requests.get(url, headers=header, params=param)
     output = res.json()
-    df_one = pd.DataFrame(output['output1'], index=[0])
-    df_one.insert(0, 'date', now.strftime("%Y%m%d"))
-    df_one.insert(1, 'time', now.strftime("%H:%M") )
-    df_one.insert(2, 'kospi200Index', output['output3']['bstp_nmix_prpr'])
-    
-    typeValue = ""
-    if df_one['hts_kor_isnm'].iloc[0][0] in ('C', 'P'):
-      typeValue = df_one['hts_kor_isnm'].iloc[0][0]
-    elif df_one['hts_kor_isnm'].iloc[0][0] in ['F']:
-      typeValue = "F"
-    df_one.insert(3, 'type', typeValue)
+    try:
+      df_one = pd.DataFrame(output['output1'], index=[0])
+      df_one.insert(0, 'date', now.strftime("%Y%m%d"))
+      df_one.insert(1, 'time', now.strftime("%H:%M") )
+      df_one.insert(2, 'kospi200Index', output['output3']['bstp_nmix_prpr'])
+      
+      typeValue = ""
+      if df_one['hts_kor_isnm'].iloc[0][0] in ('C', 'P'):
+        typeValue = df_one['hts_kor_isnm'].iloc[0][0]
+      elif df_one['hts_kor_isnm'].iloc[0][0] in ['F']:
+        typeValue = "F"
+      df_one.insert(3, 'type', typeValue)
 
-    maturity = ''
-    exercisePrice = ''
-    if typeValue in ('C', 'P'):      
-      maturity, exercisePrice = df_one['hts_kor_isnm'].iloc[0].split()[1:]
-    elif typeValue in ('F'):
-      maturity = df_one['hts_kor_isnm'].iloc[0].split()[1]
+      maturity = ''
+      exercisePrice = ''
+      if typeValue in ('C', 'P'):      
+        maturity, exercisePrice = df_one['hts_kor_isnm'].iloc[0].split()[1:]
+      elif typeValue in ('F'):
+        maturity = df_one['hts_kor_isnm'].iloc[0].split()[1]
 
-    df_one.insert(4, 'maturity', maturity)
-    df_one.insert(5, 'exercisePrice', exercisePrice)
+      df_one.insert(4, 'maturity', maturity)
+      df_one.insert(5, 'exercisePrice', exercisePrice)
 
-    df_one.insert(6, 'price', df_one.pop('futs_prpr'))
-    return df_one
+      df_one.insert(6, 'price', df_one.pop('futs_prpr'))
+      return df_one
+    except:
+      print("Error, getSingleDataframe: res", output)
     
 
 
