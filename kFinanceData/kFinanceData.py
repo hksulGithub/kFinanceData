@@ -20,7 +20,7 @@ class kFinanceDataInstance:
     self._AUTH_PATH = "oauth2/tokenP"
     self._URL_BASE = "https://openapivts.koreainvestment.com:29443"
     self._FUTURESOPTIONS_PRICE_URL = "/uapi/domestic-futureoption/v1/quotations/inquire-price"
-    self._codeDataFrame = self.getFutureOptionCodes()
+    self._codeDataFrame = self._getFutureOptionCodes()
 
   def genAuthToken(self):
     headers = {"content-type":"application/json"}
@@ -66,10 +66,12 @@ class kFinanceDataInstance:
     return None
 
 
-  def getFutureOptionCodes(self):
+  def _getFutureOptionCodes(self):
     zipUrl, zipFileColumns = self._getFutureOptionCodesHeaderData()
     return self._getFutureOptionCodesFromZipUrlandColumns(zipUrl, zipFileColumns)
-
+  
+  def getFutureOptionCodes(self):
+    return self._codeDataFrame
   
   def downloadFuturesOptions(self, futureOptionsCodeList):
 
