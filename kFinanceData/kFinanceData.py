@@ -21,6 +21,7 @@ class kFinanceDataInstance:
     self._URL_BASE = "https://openapivts.koreainvestment.com:29443"
     self._FUTURESOPTIONS_PRICE_URL = "/uapi/domestic-futureoption/v1/quotations/inquire-price"
     self._codeDataFrame = self._getFutureOptionCodes()
+    self._ACCESS_TOKEN = None
 
   def genAuthToken(self):
     headers = {"content-type":"application/json"}
@@ -33,9 +34,13 @@ class kFinanceDataInstance:
     try:
       self._ACCESS_TOKEN = res.json()["access_token"]
       print(self._ACCESS_TOKEN)
+      return self._ACCESS_TOKEN
     except:
       print("genAuthToken Error", res.json())
-    
+    return None
+
+  def getAuthToken(self):
+    return self._ACCESS_TOKEN
 
   def useAuthToken(self, newToken):
     self._ACCESS_TOKEN = newToken
